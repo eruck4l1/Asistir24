@@ -9,77 +9,68 @@
     header { padding: 20px; text-align: center; background: #020617; }
     h1 { margin: 0; }
     .container { padding: 20px; text-align: center; }
-    .planes { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
     .plan {
       background: #1e293b;
       padding: 20px;
       border-radius: 10px;
-      width: 250px;
+      max-width: 300px;
+      margin: auto;
     }
     button {
-      background: #22c55e;
       border: none;
-      padding: 10px;
+      padding: 12px;
       color: white;
       cursor: pointer;
       width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
     }
-    form { margin-top: 20px; }
-    input { padding: 10px; margin: 5px; width: 200px; }
+    .btn-asociarse { background: #22c55e; }
+    .btn-emergencia { background: #ef4444; }
+    input { padding: 10px; margin: 5px; width: 90%; }
+    form { margin-top: 15px; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Asistir24</h1>
-  <p>Servicio de traslado 24hs</p>
+  <p>Servicio de traslado y asistencia 24hs</p>
 </header>
 
 <div class="container">
 
-  <h2>Planes</h2>
+  <h2>Plan Básico</h2>
 
-  <div class="planes">
-    <div class="plan">
-      <h3>Básico</h3>
-      <p>$5000/mes</p>
-      <button onclick="selectPlan('Basico')">Contratar</button>
-    </div>
+  <div class="plan">
+    <p>$5000/mes</p>
+    <p>✔ Traslado 24hs</p>
+    <p>✔ Atención inmediata</p>
+    <p>✔ Cobertura local</p>
 
-    <div class="plan">
-      <h3>Pro</h3>
-      <p>$9000/mes</p>
-      <button onclick="selectPlan('Pro')">Contratar</button>
-    </div>
+    <button class="btn-asociarse" onclick="mostrarForm()">
+      Asociarse
+    </button>
 
-    <div class="plan">
-      <h3>Premium</h3>
-      <p>$15000/mes</p>
-      <button onclick="selectPlan('Premium')">Contratar</button>
-    </div>
+    <a href="https://wa.me/5491126433243" target="_blank">
+      <button class="btn-emergencia">
+        🚨 Emergencia
+      </button>
+    </a>
+
   </div>
 
-  <h2>Contratar Servicio</h2>
-
-  <form id="form">
+  <form id="form" style="display:none;">
     <input type="text" id="nombre" placeholder="Nombre" required><br>
     <input type="email" id="email" placeholder="Email" required><br>
-    <input type="hidden" id="plan">
-    <button type="submit">Enviar</button>
+    <button type="submit">Confirmar Asociación</button>
   </form>
-
-  <br>
-
-  <a href="https://wa.me/5491126433243" target="_blank">
-    <button>WhatsApp</button>
-  </a>
 
 </div>
 
 <script>
-function selectPlan(p) {
-  document.getElementById("plan").value = p;
-  alert("Seleccionaste el plan " + p);
+function mostrarForm() {
+  document.getElementById("form").style.display = "block";
 }
 
 document.getElementById("form").addEventListener("submit", function(e){
@@ -88,7 +79,7 @@ document.getElementById("form").addEventListener("submit", function(e){
   const data = {
     nombre: document.getElementById("nombre").value,
     email: document.getElementById("email").value,
-    plan: document.getElementById("plan").value
+    plan: "Basico"
   };
 
   fetch("https://asistir24-backend.onrender.com/api/contratar", {
@@ -97,7 +88,10 @@ document.getElementById("form").addEventListener("submit", function(e){
     body: JSON.stringify(data)
   })
   .then(res => res.json())
-  .then(() => alert("Solicitud enviada"))
+  .then(() => {
+    alert("Asociación enviada");
+    document.getElementById("form").reset();
+  });
 });
 </script>
 
