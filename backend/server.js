@@ -1,47 +1,22 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
-app.use(cors({
-  origin: "*"
-}));
-
+app.use(cors());
 app.use(express.json());
 
-const USER = "admin";
-const PASS = "1234";
-const TOKEN = "abc123";
+let solicitudes = [];
 
-app.get("/", (req, res) => {
-  res.send("API Asistir24 funcionando 🚀");
+app.post('/api/contratar', (req, res) => {
+  solicitudes.push(req.body);
+  console.log("Nueva solicitud:", req.body);
+  res.json({ ok: true });
 });
 
-app.post("/login", (req, res) => {
-  const { user, pass } = req.body;
-
-  if (user === USER && pass === PASS) {
-    return res.json({ token: TOKEN });
-  }
-
-  res.status(401).json({ error: "Credenciales incorrectas" });
+app.get('/api/admin', (req, res) => {
+  res.json(solicitudes);
 });
-
-app.get("/data", (req, res) => {
-  const auth = req.headers.authorization;
-
-  if (auth !== TOKEN) {
-    return res.status(403).json({ error: "No autorizado" });
-  }
-
-  res.json({
-    mensaje: "Datos protegidos",
-    servicios: ["Electricidad", "Plomería", "Cerrajería"]
-  });
-});
-
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto " + PORT);
-});
+app.listen(PORT, () => console.log("Servidor en puerto", PORT));
