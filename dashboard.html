@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel</title>
+</head>
+<body>
+
+<h2>Panel Usuario</h2>
+<p id="info"></p>
+
+<button onclick="getLocation()">Enviar Emergencia</button>
+
+<h3>Ubicación:</h3>
+<pre id="location"></pre>
+
+<script>function getLocation() {
+  navigator.geolocation.getCurrentPosition(pos => {
+
+    const emergencia = {
+      user,
+      role,
+      lat: pos.coords.latitude,
+      lon: pos.coords.longitude,
+      estado: "pendiente",
+      time: new Date().toLocaleString()
+    };
+
+    let data = JSON.parse(localStorage.getItem("emergencias")) || [];
+    data.push(emergencia);
+
+    localStorage.setItem("emergencias", JSON.stringify(data));
+
+    document.getElementById("location").innerText =
+      JSON.stringify(emergencia, null, 2);
+
+    alert("🚨 Emergencia enviada");
+  });
+}
+const user = localStorage.getItem("user");
+const role = localStorage.getItem("role");
+
+document.getElementById("info").innerText = user + " (" + role + ")";
+
+function getLocation() {
+  navigator.geolocation.getCurrentPosition(pos => {
+    const data = {
+      user,
+      role,
+      lat: pos.coords.latitude,
+      lon: pos.coords.longitude,
+      time: new Date()
+    };
+
+    let emergencias = JSON.parse(localStorage.getItem("emergencias")) || [];
+    emergencias.push(data);
+    localStorage.setItem("emergencias", JSON.stringify(emergencias));
+
+    document.getElementById("location").innerText =
+      JSON.stringify(data, null, 2);
+  });
+}
+</script>
+
+</body>
+</html>

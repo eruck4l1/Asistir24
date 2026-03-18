@@ -1,0 +1,26 @@
+function verEmergencias() {
+  let data = JSON.parse(localStorage.getItem("emergencias")) || [];
+
+  let html = "";
+
+  data.forEach((e, i) => {
+    html += `
+    <div style="border:1px solid white; margin:10px; padding:10px">
+      <b>${e.user}</b> (${e.role})<br>
+      📍 ${e.lat}, ${e.lon}<br>
+      ⏰ ${e.time}<br>
+      Estado: ${e.estado}<br>
+      <button onclick="resolver(${i})">Resolver</button>
+    </div>
+    `;
+  });
+
+  document.getElementById("data").innerHTML = html;
+}
+
+function resolver(i) {
+  let data = JSON.parse(localStorage.getItem("emergencias")) || [];
+  data[i].estado = "resuelto";
+  localStorage.setItem("emergencias", JSON.stringify(data));
+  verEmergencias();
+}
