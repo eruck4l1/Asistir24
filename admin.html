@@ -1,26 +1,34 @@
-function verEmergencias() {
-  let data = JSON.parse(localStorage.getItem("emergencias")) || [];
+<h1>Panel Admin</h1>
+<table border="1" cellpadding="5" style="color:black; background:white; width:100%">
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Patente</th>
+      <th>Seguro</th>
+      <th>Mail</th>
+      <th>Plan</th>
+    </tr>
+  </thead>
+  <tbody id="lista"></tbody>
+</table>
 
-  let html = "";
-
-  data.forEach((e, i) => {
-    html += `
-    <div style="border:1px solid white; margin:10px; padding:10px">
-      <b>${e.user}</b> (${e.role})<br>
-      📍 ${e.lat}, ${e.lon}<br>
-      ⏰ ${e.time}<br>
-      Estado: ${e.estado}<br>
-      <button onclick="resolver(${i})">Resolver</button>
-    </div>
-    `;
+<script>
+fetch("https://asistir24-backend.onrender.com/api/admin")
+  .then(res => res.json())
+  .then(data => {
+    const lista = document.getElementById("lista");
+    data.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item.marca}</td>
+        <td>${item.modelo}</td>
+        <td>${item.patente}</td>
+        <td>${item.seguro}</td>
+        <td>${item.mail}</td>
+        <td>${item.plan}</td>
+      `;
+      lista.appendChild(tr);
+    });
   });
-
-  document.getElementById("data").innerHTML = html;
-}
-
-function resolver(i) {
-  let data = JSON.parse(localStorage.getItem("emergencias")) || [];
-  data[i].estado = "resuelto";
-  localStorage.setItem("emergencias", JSON.stringify(data));
-  verEmergencias();
-}
+</script>

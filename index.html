@@ -61,24 +61,30 @@
   </div>
 
   <form id="form" style="display:none;">
-    <input type="text" id="nombre" placeholder="Nombre" required><br>
-    <input type="email" id="email" placeholder="Email" required><br>
-    <button type="submit">Confirmar Asociación</button>
-  </form>
+    <input tye="text" id="nombre" placeholder="juan" re>
+  <input tye="text" id="apellido" placeholder="lopez" required><br>
+  <input type="text" id="marca" placeholder="Marca del vehículo" required><br>
+  <input type="text" id="modelo" placeholder="Modelo del vehículo" required><br>
+  <input type="text" id="patente" placeholder="Patente" required><br>
+  <input type="text" id="seguro" placeholder="Seguro" required><br>
+  <input type="email" id="mail" placeholder="Email" required><br>
+  <button type="submit">Confirmar Asociación</button>
+</form>
 
 </div>
 
 <script>
-function mostrarForm() {
-  document.getElementById("form").style.display = "block";
-}
-
 document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   const data = {
-    nombre: document.getElementById("nombre").value,
-    email: document.getElementById("email").value,
+    apellido: document.getElementById("apellido").value,
+    nombre: documet.getElemntById("nombre").value,
+    marca: document.getElementById("marca").value,
+    modelo: document.getElementById("modelo").value,
+    patente: document.getElementById("patente").value,
+    seguro: document.getElementById("seguro").value,
+    mail: document.getElementById("mail").value,
     plan: "Basico"
   };
 
@@ -89,11 +95,11 @@ document.getElementById("form").addEventListener("submit", function(e){
   })
   .then(res => res.json())
   .then(() => {
-    alert("Asociación enviada");
+    alert("Asociación enviada con éxito");
     document.getElementById("form").reset();
   });
 });
-</script>
+  </script>
 
 </body>
 </html>
