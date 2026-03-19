@@ -4,7 +4,7 @@ const path = require('path');
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -16,14 +16,19 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// API test
+// Test API
 app.get("/api/status", (req, res) => {
-  res.json({ status: "ok", app: "Asistir24" });
+  res.json({ status: "ok" });
 });
 
-// Puerto dinámico (Render/Railway)
-const PORT = process.env.PORT || 3000;
+// 🔥 IMPORTANTE PARA RAILWAY
+const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+if (!PORT) {
+  console.error("❌ PORT no definido");
+  process.exit(1);
+}
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log("Servidor corriendo en puerto " + PORT);
 });
