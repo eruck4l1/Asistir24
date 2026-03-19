@@ -1,30 +1,14 @@
 function login() {
   const user = document.getElementById("user").value;
+  const pass = document.getElementById("pass").value;
   const role = document.getElementById("role").value;
 
-  if (!user) {
-    alert("Ingresá un usuario");
+  if (!user || !pass) {
+    alert("Completar todos los campos");
     return;
   }
 
-  localStorage.setItem("user", user);
-  localStorage.setItem("role", role);
+  alert(`Bienvenido ${user} (${role})`);
 
-  if (role === "admin") {
-    window.location.href = "admin.html";
-  } else {
-    window.location.href = "dashboard.html";
-  }
+  // FUTURO: conectar con backend
 }
-
-// AUTO LOGIN
-(function () {
-  const path = window.location.pathname;
-
-  if (path.includes("dashboard") || path.includes("admin")) {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      window.location.href = "index.html";
-    }
-  }
-})();

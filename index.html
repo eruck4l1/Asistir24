@@ -3,103 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Asistir24</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial; margin: 0; background: #0f172a; color: white; }
-    header { padding: 20px; text-align: center; background: #020617; }
-    h1 { margin: 0; }
-    .container { padding: 20px; text-align: center; }
-    .plan {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 300px;
-      margin: auto;
-    }
-    button {
-      border: none;
-      padding: 12px;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-    .btn-asociarse { background: #22c55e; }
-    .btn-emergencia { background: #ef4444; }
-    input { padding: 10px; margin: 5px; width: 90%; }
-    form { margin-top: 15px; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
+  <img src="img/logo-24.jpg" alt="Logo" class="logo">
   <h1>Asistir24</h1>
-  <p>Servicio de traslado y asistencia 24hs</p>
 </header>
 
-<div class="container">
+<section class="banner">
+  <img src="img/banner-24.jpg" alt="Banner">
+</section>
 
-  <h2>Plan Básico</h2>
+<div class="login-box">
+  <h2>Ingreso</h2>
 
-  <div class="plan">
-    <p>$5000/mes</p>
-    <p>✔ Traslado 24hs</p>
-    <p>✔ Atención inmediata</p>
-    <p>✔ Cobertura local</p>
+  <input type="text" id="user" placeholder="Usuario">
+  <input type="password" id="pass" placeholder="Contraseña">
 
-    <button class="btn-asociarse" onclick="mostrarForm()">
-      Asociarse
-    </button>
+  <select id="role">
+    <option value="cliente">Cliente</option>
+    <option value="prestador">Prestador</option>
+    <option value="admin">Admin</option>
+  </select>
 
-    <a href="https://wa.me/5491126433243" target="_blank">
-      <button class="btn-emergencia">
-        🚨 Emergencia
-      </button>
-    </a>
-
-  </div>
-
-  <form id="form" style="display:none;">
-    <input tye="text" id="nombre" placeholder="juan" re>
-  <input tye="text" id="apellido" placeholder="lopez" required><br>
-  <input type="text" id="marca" placeholder="Marca del vehículo" required><br>
-  <input type="text" id="modelo" placeholder="Modelo del vehículo" required><br>
-  <input type="text" id="patente" placeholder="Patente" required><br>
-  <input type="text" id="seguro" placeholder="Seguro" required><br>
-  <input type="email" id="mail" placeholder="Email" required><br>
-  <button type="submit">Confirmar Asociación</button>
-</form>
-
+  <button onclick="login()">Ingresar</button>
 </div>
 
-<script>
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const data = {
-    apellido: document.getElementById("apellido").value,
-    nombre: documet.getElemntById("nombre").value,
-    marca: document.getElementById("marca").value,
-    modelo: document.getElementById("modelo").value,
-    patente: document.getElementById("patente").value,
-    seguro: document.getElementById("seguro").value,
-    mail: document.getElementById("mail").value,
-    plan: "Basico"
-  };
-
-  fetch("https://asistir24-backend.onrender.com/api/contratar", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(() => {
-    alert("Asociación enviada con éxito");
-    document.getElementById("form").reset();
-  });
-});
-  </script>
+<script src="app.js"></script>
 
 </body>
 </html>

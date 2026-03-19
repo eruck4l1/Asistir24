@@ -1,29 +1,50 @@
 body {
-  font-family: Arial;
-  background: #0f172a;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0d1117;
   color: white;
   text-align: center;
 }
 
-input, select, button {
-  margin: 10px;
+header {
+  padding: 20px;
+}
+
+.logo {
+  width: 80px;
+}
+
+.banner img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.login-box {
+  background: #161b22;
+  padding: 20px;
+  margin: 20px auto;
+  width: 300px;
+  border-radius: 10px;
+}
+
+input, select {
+  width: 90%;
   padding: 10px;
-  border-radius: 8px;
+  margin: 10px 0;
   border: none;
+  border-radius: 5px;
 }
 
 button {
-  background: #22c55e;
+  padding: 10px;
+  width: 100%;
+  background: #238636;
+  border: none;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background: #16a34a;
-}
-
-pre {
-  background: #1e293b;
-  padding: 10px;
-  border-radius: 10px;
+  background: #2ea043;
 }
