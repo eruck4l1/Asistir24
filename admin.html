@@ -1,34 +1,24 @@
-<h1>Panel Admin</h1>
-<table border="1" cellpadding="5" style="color:black; background:white; width:100%">
-  <thead>
-    <tr>
-      <th>Marca</th>
-      <th>Modelo</th>
-      <th>Patente</th>
-      <th>Seguro</th>
-      <th>Mail</th>
-      <th>Plan</th>
-    </tr>
-  </thead>
-  <tbody id="lista"></tbody>
-</table>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<script>
-fetch("https://asistir24-backend.onrender.com/api/admin")
-  .then(res => res.json())
-  .then(data => {
-    const lista = document.getElementById("lista");
-    data.forEach(item => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${item.marca}</td>
-        <td>${item.modelo}</td>
-        <td>${item.patente}</td>
-        <td>${item.seguro}</td>
-        <td>${item.mail}</td>
-        <td>${item.plan}</td>
-      `;
-      lista.appendChild(tr);
-    });
-  });
-</script>
+<h1>Panel Admin</h1>
+
+<h3>Usuarios</h3>
+<ul>
+  <li>Cliente activo</li>
+  <li>Prestador disponible</li>
+</ul>
+
+<h3>Emergencias</h3>
+<ul>
+  <li>🚨 En curso - Zárate</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cliente</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Panel Cliente</h1>
+
+<button class="btn-red" onclick="pedir()">🚨 Pedir Emergencia</button>
+
+<p id="estado"></p>
+
+<script>
+function pedir() {
+  document.getElementById("estado").innerText = "Buscando asistencia...";
+  
+  setTimeout(() => {
+    document.getElementById("estado").innerText = "Prestador en camino 🚗";
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
