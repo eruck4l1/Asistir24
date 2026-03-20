@@ -52,3 +52,12 @@ button:hover {
 .btn-red {
   background: red;
 }
+.chat-box {
+  background: #161b22;
+  margin: 20px auto;
+  padding: 15px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  text-align: left;
+}
